@@ -86,8 +86,17 @@ c_filter([H|T], Predicate)->
 %%% Complexity - O(n)
 %%% @end
 %%%-------------------------------------------------------------------
+pick_candidates(List) when is_list(List) == false -> no_list_error;
+pick_candidates([])->[];
 pick_candidates(Applicants)->
-	to_do.
+	c_map(
+		c_filter(Applicants, fun({_,_,Skills}) -> lists:member(javascript,Skills) or lists:member(erlang,Skills) end),
+		fun({Name,Years,Skills}) -> 
+			case lists:member(javascript,Skills) ->
+				true -> {Name,Years,backend,Skills};
+				false -> {Name,Years,frontend,Skills}
+			end
+	).
 
 
 %%% Only include the eunit testing library and functions

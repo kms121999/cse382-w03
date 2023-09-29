@@ -90,12 +90,15 @@ pick_candidates(List) when is_list(List) == false -> no_list_error;
 pick_candidates([])->[];
 pick_candidates(Applicants)->
 	c_map(
+		% Part 1
 		c_filter(Applicants, fun({_,_,Skills}) -> lists:member(javascript,Skills) or lists:member(erlang,Skills) end),
+		% Part 2 
 		fun({Name,Years,Skills}) -> 
-			case lists:member(javascript,Skills) ->
+			case lists:member(erlang,Skills) of
 				true -> {Name,Years,backend,Skills};
 				false -> {Name,Years,frontend,Skills}
 			end
+		end
 	).
 
 

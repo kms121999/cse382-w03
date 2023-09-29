@@ -87,7 +87,6 @@ c_filter([H|T], Predicate)->
 %%% @end
 %%%-------------------------------------------------------------------
 pick_candidates(List) when is_list(List) == false -> no_list_error;
-pick_candidates([])->[];
 pick_candidates(Applicants)->
 	c_map(
 		% Part 1
